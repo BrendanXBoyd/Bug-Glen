@@ -2,7 +2,7 @@ Hello! **If you're looking at my GitHub profile from my resume, welcome! Here's 
 
 This whole thing is one file. That's one of the restrictions of making a game with PICO-8. Most heinous? Maybe, but I don't make the rules.
 Different sections are delineated with a `--- XXX ---` comment, where `XXX` describes that section.
-If you open this in the PICO-8 editor (drag and drop the file to https://www.pico-8-edu.com/, esc to edit, ctrl+R to run), you'll see it broken into 
+If you open this in the PICO-8 editor (drag and drop the file to [pico-8-edu.com](https://www.pico-8-edu.com/), esc to edit, ctrl+R to run), you'll see it broken into 
 several tabs. In the text file, these are separated with a `-->8`.
 
 I do some funky binary/bit manipulation in here to enable Saving under PICO-8's restrictions. There's also some interesting metatable swapping for
