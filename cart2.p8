@@ -247,7 +247,53 @@ function btl.loop()
 			btl.menu_pos=0
 		end
 	elseif btl.menu=='fight' then
-		if (apress()) game_handler=game
+		if btl.f1==-1 then
+			if (btnp(3) or btnp(1)) and btl.menu_pos<2 then
+				btl.menu_pos+=1
+			elseif (btnp(2) or btnp(0)) and btl.menu_pos>0 then
+				btl.menu_pos-=1
+			end
+			if (apress()) then 
+				btl.f1=btl.menu_pos
+				if (btl.f1==0) btl.menu_pos=2
+				if (btl.f1~=0) btl.menu_pos=0
+			end
+			if (bpress()) then
+				btl.menu="main"
+				btl.menu_pos=0
+			end
+		elseif btl.f2==-1 then
+			if btl.f1==1 then
+				if btnp(3) and btl.menu_pos<6 then
+					btl.menu_pos+=3
+				elseif btnp(2) and btl.menu_pos>2 then
+					btl.menu_pos-=3
+				elseif btnp(0) and (btl.menu_pos%3)>0 then
+					btl.menu_pos-=1
+				elseif btnp(1) and (btl.menu_pos%3)<2 then
+					btl.menu_pos+=1
+				end
+			else
+				if btnp(3) and btl.menu_pos<6 then
+					btl.menu_pos+=6
+				elseif btnp(2) and btl.menu_pos>2 then
+					btl.menu_pos-=6
+				elseif btnp(0) and (btl.menu_pos%3)>0 then
+					btl.menu_pos-=2
+				elseif btnp(1) and (btl.menu_pos%3)<2 then
+					btl.menu_pos+=2
+				end
+				--todo:prevent f2==f1.
+			end
+			if (bpress()) then
+				btl.menu_pos=btl.f1
+				btl.f1=-1
+			end
+			if (apress()) then
+				--todo: battle anim
+				game_handler=game
+			end
+		end
 	else
 		if (apress()) game_handler=game
 	end
@@ -320,13 +366,24 @@ function btl.draw()
 			end
 		end
 		--highlight sqr for select
-		if btl.f1==-1 and flr(fcnt/8)%2==0 then
-			rect(49,88,58,97,7)
+		if btl.f1==-1 then
+			if flr(fcnt/8)%2==0 then
+				local dx=btl.menu_pos*9
+				rect(49+dx,88+dx,58+dx,97+dx,7)
+			end
+		elseif btl.f2==-1 then
+			local dx=btl.f1*9
+			rect(49+dx,88+dx,58+dx,97+dx,7)
+			if flr(fcnt/8)%2==0 then
+				dx=btl.menu_pos%3*9
+				local dy=flr(btl.menu_pos/3)*9
+				rect(49+dx,88+dy,58+dx,97+dy,10)
+				--todo:draw full line
+			end
 		end
 	end
 	
 	--todo:draw btl bugs
-	--     draw grid at bottom
 end
 
 function _draw()
