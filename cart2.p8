@@ -299,7 +299,6 @@ function btl.loop()
 				elseif btnp(1) and (btl.menu_pos%3)<2 then
 					btl.menu_pos+=2
 				end
-				--todo:prevent f2==f1.
 			end
 			if (bpress()) then
 				btl.menu_pos=btl.f1
